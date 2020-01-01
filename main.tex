@@ -1,0 +1,273 @@
+\documentclass[onecolumn,showpacs,amsmath,amssymb,prd,floatfix,preprintnumbers]{revtex4}
+% \usepackage{graphicx}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{bm}
+\usepackage{amsmath}
+%\usepackage[dvipdfm]{color}
+%\input{colordvi.tex}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{comment}
+\usepackage{multirow}
+\usepackage{cancel}
+%\usepackage[dvipdfm,
+% bookmarkstype=toc=true,
+% linktocpage=true,
+% bookmarks=true
+% ]{hyperref}
+\usepackage[varg]{txfonts}
+
+
+\hypersetup{
+  bookmarksnumbered=true,
+  linkcolor=red,
+  citecolor=green,
+  urlcolor=cyan
+}
+%\bibliography{bibfilename}
+%\bibliographystyle{unsrt}
+
+\newcommand{\mnras}{Mon.~Not.~Roy.~Astron.~Soc.}
+\newcommand{\physrep}{Phys.~Rep.}
+\newcommand{\jcap}{JCAP}
+\newcommand{\pasj}{PASJ}
+\newcommand{\apjl}{\apj~Lett.}
+\newcommand{\apjs}{\apj~Suppl.}
+\newcommand{\aap}{Astronomy~\&~Astrophysics}
+\newcommand{\aj}{The~Astronomical~J.}
+
+\newcommand{\question}[1]{\textcolor{cyan}{#1}}
+
+\newcommand{\bbr}{{\bf r}}
+\newcommand{\bx}{{\bf x}}
+\newcommand{\by}{{\bf y}}
+\newcommand{\bs}{{\bf s}}
+\newcommand{\bk}{{\bf k}}
+\newcommand{\btheta}{{\bf{\theta}}}
+\newcommand{\bq}{{\bf q}}
+\newcommand{\bp}{{\bf p}}
+\newcommand{\bn}{{\bf n}}
+\newcommand{\bl}{{\bf l}}
+\newcommand{\hk}{\hat{k}}
+\newcommand{\hq}{\hat{q}}
+\newcommand{\hn}{\hat{n}}
+\newcommand{\lin}{{\rm L}}
+\newcommand{\non}{{\rm N}}
+\newcommand{\tdelta}{\tilde{\delta}}
+\newcommand{\tW}{\tilde{W}}
+\newcommand{\tu}{\tilde{u}}
+\newcommand{\br}{{\rm b}}
+\newcommand{\dml}{\delta_{{\rm m}L}}
+\newcommand{\tdml}{\tilde{\delta}_{{\rm m}L}}
+\newcommand{\hMpci}{$h\,$Mpc$^{-1}$}
+\newcommand{\hiMpc}{$h^{-1}\,$Mpc}
+\newcommand{\del}{\partial}
+\newcommand{\Om}{\Omega_{\rm m}}
+\renewcommand{\O}{\mathcal{O}}
+\renewcommand{\L}{\mathcal{L}}
+
+\def\avrg#1{\left\langle #1 \right\rangle}
+\def\avrgb#1{\left\langle #1 \right\rangle_\textrm{b}}
+
+\newcommand{\simgt}{\lower.5ex\hbox{$\; \buildrel > \over \sim \;$}}
+\newcommand{\simlt}{\lower.5ex\hbox{$\; \buildrel < \over \sim \;$}}
+
+\begin{document}
+
+\title[]{The covariance of the redshift-space galaxy power spectrum}
+
+\author{Yosuke Kobayashi${}^{1,2}$}
+\email{yosuke.kobayashi@ipmu.jp}
+% \author{Takahiro Nishimichi${}^{3,1}$}
+% \author{Masahiro Takada${}^{1}$}
+% \author{Ryuichi Takahashi${}^{4}$}
+\affiliation{
+${}^{1}$Kavli Institute for the Physics and Mathematics of the Universe
+(WPI), The University of Tokyo Institutes for Advanced Study (UTIAS),
+The University of Tokyo, Chiba 277-8583, Japan\\
+${}^{2}$ Physics Department,
+The University of Tokyo, Bunkyo, Tokyo 113-0031, Japan\\
+% ${}^3$Center for Gravitational Physics, Yukawa Institute for Theoretical Physics, Kyoto University, Kyoto 606-8502, Japan\\
+% ${}^4$Faculty of Science and Technology, Hirosaki University, 3 Bunkyo-cho, Hirosaki, Aomori 036-8561, Japan
+}
+
+\date{\today}
+\maketitle
+
+This note is on the detailed calculations of the covariance of the redshift-space galaxy power spectrum. 
+
+In order to measure the power spectrum from the galaxy redshift surveys, which include the window function effect due to the survey geometry and the redshift-space distortions, we commonly use the well-known FKP estimator \cite{feldman94}. 
+This takes into account the inhomogeneous mean galaxy density arising from the survey selection functions $\bar{n}(\bx)$, 
+and define the weighted density field:
+\begin{align}
+\label{eq:fkp_density}
+ \hat{\delta}^{\rm FKP}(\bx) \equiv \frac{w(\bx) [n_{\rm g}(\bx) - \alpha n_{\rm r}(\bx)]}{\left[ \alpha \int {\rm d}^3x w^2(\bx) \bar{n}(\bx) n_{\rm r}(\bx) \right]^{1/2}},
+\end{align}
+where the weight $w(\bx)$ is called FKP weight, which is introduced so that the noise of the measured power spectrum is minimized in the limit of Gaussian distributions.
+Here we also introduce $\alpha \equiv N_{\rm g} / N_{\rm r}$, which should be treated as a random variable.
+This is because the galaxy number in a survey region, $N_{\rm g}$, has a fluctuation whose mode is longer than the survey size, which means that even in the equivalent survey volume, we can observe diffrent number of galaxies by this fluctuation.
+Hence we treat the quantity $\alpha n_{\rm r}(\bx)$ as different from the survey selection $\bar{n}(\bx)$ by the fluctuation of the average galaxy number density $\delta_{N_{\rm g}}$,
+\begin{align}
+  \alpha n_{\rm r}(\bx) = \bar{n}(\bx) (1 + \delta_{N_{\rm g}}) \equiv \bar{n}(\bx) \frac{\int_{\bx'} \bar{n}(\bx') (1+\delta(\bx'))}{\int_{\bx'} \bar{n}(\bx')}.
+\end{align}
+When we define following notations:
+\begin{align}
+  W_{ij}(\bx) \equiv \bar{n}^i(\bx) w^j(\bx),\,I_{ij} \equiv \int_{\bx} W_{ij}(\bx),
+\end{align}
+we can rewrite this fluctuation as
+\begin{align}
+  \delta_{N_{\rm g}} = \frac{\int_{\bx} W_{10}(\bx) \delta(\bx)}{I_{10}}. 
+\end{align}
+Using these notations we simplify the FKP density field Eq.~\ref{eq:fkp_density} as
+\begin{align}
+  \hat{\delta}^{\rm FKP}(\bx) &= \frac{w(\bx) [\bar{n}(\bx) (1 + \delta(\bx)) - \bar{n}(\bx) (1 + \delta_{N_{\rm g}}) ]}{\left[ (1 + \delta_{N_{\rm g}}) \int {\rm d}^3x \bar{n}^2(\bx) w^2(\bx) \right]^{1/2}}
+  = \frac{w(\bx) \bar{n}(\bx) [\delta(\bx) - \delta_{N_{\rm g}} ]}{\left[ (1 + \delta_{N_{\rm g}}) I_{22} \right]^{1/2}}
+  = \frac{1}{\sqrt{I_{22}}} \frac{W_{11}(\bx) [\delta(\bx) - \delta_{N_{\rm g}} ]}{(1 + \delta_{N_{\rm g}})^{1/2}} \\
+  &\simeq \frac{1}{\sqrt{I_{22}}} \frac{W_{11}(\bx)\delta(\bx)}{(1 + \delta_{N_{\rm g}})^{1/2}}
+  \equiv \frac{1}{\sqrt{I_{22}}} \frac{\delta_W(\bx)}{(1 + \delta_{N_{\rm g}})^{1/2}}.
+\end{align}
+
+\section{Covariance in real space}
+
+From the formulation above, we can construct an estimator of the power spectrum by
+\begin{align}
+\label{eq:FKPestimator}
+  \hat{P}(k) \equiv \int_{\hat{\bk}} \left| \hat{\delta}^{\rm FKP}(\bk) \right|^2 = \frac{1}{I_{22}} \int_{\hat{\bk}} \frac{\left| \delta_W(\bk) \right|^2}{1+\delta_{N_{\rm g}}}.
+\end{align}
+Here we momentarily neglect the super-survey fluctuation $\delta_{N_{\rm g}}$ and define
+\begin{align}
+\label{eq:estimator_simple}
+  \hat{P}_W(k) = \frac{1}{I_{22}} \int_{\hat{\bk}} \left|\delta_W(\bk) \right|^2.
+\end{align}
+Since 
+\begin{align}
+  \avrg{\left|\delta_W(\bk) \right|^2} &= \avrg{\left| \int_{\bx} e^{i\bk \cdot \bx} W_{11}(\bx) \delta(\bx) \right|^2}
+  = \avrg{ \left| \int_{\bk'} W(\bk') \delta(\bk-\bk') \right|^2} \nonumber \\
+  &= \avrg{ \int_{\bk'} W(\bk') \delta(\bk-\bk') \int_{\bk''} W^\ast(\bk'') \delta^\ast(\bk-\bk'') } \nonumber \\
+  &= \int_{\bk'} \int_{\bk''} W(\bk') W^\ast(\bk'') \avrg{ \delta(\bk-\bk') \delta^\ast(\bk-\bk'') }
+  = \int_{\bk'} \int_{\bk''} W(\bk') W^\ast(\bk'') \avrg{ \delta(\bk-\bk') \delta(-\bk+\bk'') } \nonumber \\
+  &= \int_{\bk'} \int_{\bk''} W(\bk') W^\ast(\bk'') (2\pi)^3 \delta_{\rm D}(\bk-\bk'-\bk+\bk'') P(\bk-\bk') \nonumber \\
+  &= \int_{\bk'} \left|W(\bk')\right|^2 P(\bk-\bk'),
+\end{align}
+we can calculate the expectation value of the estimator Eq.~\ref{eq:estimator_simple} as
+\begin{align}
+  \avrg{\hat{P}_W(k)} &= \frac{1}{I_{22}} \int_{\hat{\bk}} \avrg{\left|\delta_W(\bk) \right|^2}
+  = \frac{1}{I_{22}} \int_{\hat{\bk}} \int_{\bk'} \left|W(\bk')\right|^2 P(\bk-\bk') \nonumber \\
+  &\simeq \frac{1}{I_{22}} \int_{\hat{\bk}} P(k) \int_{\bk'} \left|W(\bk')\right|^2
+  = P(k) \frac{1}{I_{22}} \int_{\bk'} \left|W(\bk')\right|^2 = P(k),
+\end{align}
+where we use the fact that the survey window $W(\bk)$ is typically confined to the lower-$k$ region relative to scales we observe in the survey, and hence we can assume $|\bk'| \ll |\bk|$ in above formula. In addition we use $I_{22} \equiv \int_\bx W_{11}^2(\bx) = \int_\bk |W_{11}(\bk)|^2$.
+
+The covariance from the estimator Eq.~\ref{eq:estimator_simple} is 
+\begin{align}
+  {\bf C}(k_1,k_2) = \avrg{\hat{P}_W(k_1) \hat{P}_W(k_2)} - \avrg{\hat{P}_W(k_1)} \avrg{\hat{P}_W(k_2)}
+\end{align}
+where
+\begin{align}
+  \avrg{\hat{P}_W(k_1) \hat{P}_W(k_2)} &= \frac{1}{I_{22}^2} \int_{\hat{\bk}_1} \int_{\hat{\bk}_2} \avrg{\delta_W(\bk_1) \delta_W(-\bk_1) \delta_W(\bk_2) \delta_W(-\bk_2)} \nonumber \\
+  &= \frac{1}{I_{22}^2} \int_{\hat{\bk}_1, \hat{\bk}_2} \int_{\bp_1,\bp'_1,\bp_2,\bp'_2} W_{11}(\bk_1-\bp_1) W_{11}(-\bk_1-\bp'_1) W_{11}(\bk_2-\bp_2) W_{11}(-\bk_2-\bp'_2) \avrg{\delta(\bp_1) \delta(-\bp_1) \delta(\bp_2) \delta(-\bp_2)}
+\end{align}
+This covariance is decomposed into the Gaussian and non-Gaussian terms as
+\begin{align}
+  {\bf C}(k_1,k_2) = {\bf C}^{\rm G}(k_1,k_2) + {\bf C}^{\rm T}(k_1,k_2),
+\end{align}
+where we first focus on the trispectrum contribution
+\begin{align}
+  {\bf C}^{\rm T}(k_1,k_2) = \frac{1}{I_{22}^2} \int_{\hat{\bk}_1, \hat{\bk}_2} \avrg{\delta_W(\bk_1) \delta_W(-\bk_1) \delta_W(\bk_2) \delta_W(-\bk_2)}_c.
+\end{align}
+This can be proceeded as
+\begin{align}
+  {\bf C}^{\rm T}(k_1,k_2) &= \frac{1}{I_{22}^2} \int_{\hat{\bk}_1, \hat{\bk}_2} \int_{\bp_1,\bp'_1,\bp_2,\bp'_2} W_{11}(\bp_1) W_{11}(\bp'_1) W_{11}(\bp_2) W_{11}(\bp'_2) \avrg{\delta(\bk_1-\bp_1) \delta(-\bk_1-\bp'_1) \delta(\bk_2-\bp_2) \delta(-\bk_2-\bp'_2)}_c \nonumber \\
+  &= \frac{1}{I_{22}^2} \int_{\hat{\bk}_1, \hat{\bk}_2} \int_{\bp_1,\bp'_1,\bp_2,\bp'_2} W_{11}(\bp_1) W_{11}(\bp'_1) W_{11}(\bp_2) W_{11}(\bp'_2) 
+  (2\pi)^3 \delta_{\rm D}(\bp_1+\bp'_1+\bp_2+\bp'_2) T(\bk_1-\bp_1, -\bk_1-\bp'_1, \bk_2-\bp_2, -\bk_2-\bp'_2). 
+\end{align}
+Here again the wavevectors $\bp_1,\bp'_1,\bp_2,\bp'_2$ are confined in the survey scale, we introduce ${\boldsymbol \epsilon} \equiv (\bp_1+\bp'_1) = - (\bp_2+\bp'_2)$ and 
+\begin{align}
+\label{eq:cov_nG_bc}
+  {\bf C}^{\rm T}(k_1,k_2) &= \frac{1}{I_{22}^2} \int_{\hat{\bk}_1,\hat{\bk}_2} \int_{\bp_1,\bp'_1,\bp_2,{\boldsymbol \epsilon}} W_{11}(\bp_1) W_{11}(\bp'_1) W_{11}(\bp_2) W_{11}(-{\boldsymbol \epsilon}-\bp_2) 
+  (2\pi)^3 \delta_{\rm D}(\bp_1+\bp'_1-{\boldsymbol \epsilon}) T(\bk_1-\bp_1, -\bk_1-\bp'_1, \bk_2-\bp_2, -\bk_2+{\boldsymbol \epsilon}+\bp_2) \nonumber \\
+  &= \frac{1}{I_{22}^2} \int_{\hat{\bk}_1,\hat{\bk}_2} \int_{\bp_1,\bp_2,{\boldsymbol \epsilon}} W_{11}(\bp_1) W_{11}({\boldsymbol \epsilon}-\bp_1) W_{11}(\bp_2) W_{11}(-{\boldsymbol \epsilon}-\bp_2) T(\bk_1-\bp_1, -\bk_1-{\boldsymbol \epsilon}+\bp_1, \bk_2-\bp_2, -\bk_2+{\boldsymbol \epsilon}+\bp_2).
+\end{align}
+This so-called beat mode ${\boldsymbol \epsilon}$ is smaller than the scales we are observing, and hence we can see the beat-coupling by expanding the trispectrum in ${\boldsymbol \epsilon}$.
+The beat-coupling is the coupling between the super- and sub-survey modes arising due to the survey window function, and in the absence of the survey window, the trispectrum contribution to the power spectrum covariance is only from the regular trispectrum $T_0 = T(\bk_1, -\bk_1, \bk_2, -\bk_2)$. 
+
+In this note we treat ${\bf C}^T(k_1,k_2)$ with the tree-level perturbative expansion, and this is 
+\begin{align}
+  &T(\bk_1, \bk_2, \bk_3, \bk_4) \nonumber \\
+  &= 4 Z_1(\bk_1) P_{\rm L}(\bk_1) Z_1(\bk_2) P_{\rm L}(\bk_2) P_{\rm L}(\bk_{13}) Z_2(\bk_1,-\bk_{13}) Z_2(\bk_2,\bk_{13}) + {\rm cyclic} \,(12 \,{\rm snake\,terms}) \nonumber \\
+  &+ Z_1(\bk_1) P_{\rm L}(\bk_1) Z_1(\bk_2) P_{\rm L}(\bk_2) Z_1(\bk_3) P_{\rm L}(\bk_3) \left[ Z_3(\bk_1, \bk_2, \bk_3) + {\rm perm.} \,(6\,{\rm terms}) \right] + {\rm cyclic} \,(4\,{\rm star\,terms}),
+\end{align}
+where $P_L$ is the linear matter power spectrum.
+The regular trispectrum is
+\begin{align}
+\label{eq:trispec_regular}
+  T_0 &\equiv T(\bk_1, -\bk_1, \bk_2, -\bk_2) \nonumber \\
+  &= \left[ 8 Z_1^2(\bk_1) P_{\rm L}^2(\bk_1) P_{\rm L}(\bk_1+\bk_2) Z_2^2(-\bk_1,\bk_1+\bk_2) + (\bk_1 \leftrightarrow \bk_2) \right] \nonumber \\
+  &+ 16 Z_1(\bk_1) P_{\rm L}(\bk_1) Z_1(\bk_2) P_{\rm L}(\bk_2) P_{\rm L}(\bk_1+\bk_2) Z_2(-\bk_1,\bk_1+\bk_2) Z_2(-\bk_2,\bk_1+\bk_2) \nonumber \\
+  &+ \left[ 12 Z_1^2(\bk_1) P_{\rm L}^2(\bk_1) Z_1(\bk_2) P_{\rm L}(\bk_2) Z_3(\bk_1,-\bk_1,\bk_2) + (\bk_1 \leftrightarrow \bk_2) \right]
+\end{align}
+On the other hand, the beat-coupling trispectrum is
+\begin{align}
+\label{eq:trispec_bc}
+  T_{\rm BC} \simeq &~4P(\epsilon) \left[ P_{\rm L}(\bk_1-\bp_1) Z_2(\bk_1-\bp_1, {\boldsymbol \epsilon}) + P_{\rm L}(-\bk_1-{\boldsymbol \epsilon}+\bp_1) Z_2(-\bk_1-{\boldsymbol \epsilon}+\bp_1, {\boldsymbol \epsilon}) \right] \nonumber \\
+  &~\times \left[ P_{\rm L}(\bk_2-\bp_2) Z_2(\bk_2-\bp_2, -{\boldsymbol \epsilon}) + P_{\rm L}(-\bk_2-{\boldsymbol \epsilon}+\bp_2) Z_2(-\bk_2-{\boldsymbol \epsilon}+\bp_2, -{\boldsymbol \epsilon}) \right],
+\end{align}
+and by substitute this to the covariance Eq.~\ref{eq:cov_nG_bc}, 
+\begin{align}
+  &{\bf C}^{\rm BC}(k_1,k_2) \nonumber \\ 
+  &= \frac{1}{I_{22}^2} \int_{\hat{\bk}_1,\hat{\bk}_2} \int_{\bp_1,\bp_2,{\boldsymbol \epsilon}} W_{11}(\bp_1) W_{11}({\boldsymbol \epsilon}-\bp_1) W_{11}(\bp_2) W_{11}(-{\boldsymbol \epsilon}-\bp_2) T^{\rm BC}(\bk_1-\bp_1, -\bk_1-{\boldsymbol \epsilon}+\bp_1, \bk_2-\bp_2, -\bk_2+{\boldsymbol \epsilon}+\bp_2) \nonumber \\
+  &\simeq \frac{1}{I_{22}^2} \int_{\hat{\bk}_1,\hat{\bk}_2} \int_{\bp_1,\bp_2,{\boldsymbol \epsilon}} W_{11}(\bp_1) W_{11}({\boldsymbol \epsilon}-\bp_1) W_{11}(\bp_2) W_{11}(-{\boldsymbol \epsilon}-\bp_2) 4P(\epsilon) \nonumber \\
+  &\,\, \times \left[ P_{\rm L}(\bk_1-\bp_1) Z_2(\bk_1-\bp_1, {\boldsymbol \epsilon}) + P_{\rm L}(-\bk_1-{\boldsymbol \epsilon}+\bp_1) Z_2(-\bk_1-{\boldsymbol \epsilon}+\bp_1, {\boldsymbol \epsilon}) \right] \nonumber \\
+  &\,\, \times \left[ P_{\rm L}(\bk_2-\bp_2) Z_2(\bk_2-\bp_2, -{\boldsymbol \epsilon}) + P_{\rm L}(-\bk_2-{\boldsymbol \epsilon}+\bp_2) Z_2(-\bk_2-{\boldsymbol \epsilon}+\bp_2, -{\boldsymbol \epsilon}) \right] \nonumber \\
+  &= \frac{4}{I_{22}^2} \int_{\boldsymbol \epsilon} P(\epsilon) 
+  \left\{ \int_{\hat{\bk}_1,\bp_1} W_{11}(\bp_1) W_{11}({\boldsymbol \epsilon}-\bp_1) \left[ P_{\rm L}(\bk_1-\bp_1) Z_2(\bk_1-\bp_1, {\boldsymbol \epsilon}) + P_{\rm L}(-\bk_1-{\boldsymbol \epsilon}+\bp_1) Z_2(-\bk_1-{\boldsymbol \epsilon}+\bp_1, {\boldsymbol \epsilon}) \right] \right\} \nonumber \\
+  &\,\, \times \left\{ \int_{\hat{\bk}_2,\bp_2} W_{11}(\bp_2) W_{11}(-{\boldsymbol \epsilon}-\bp_2) \left[ P_{\rm L}(\bk_2-\bp_2) Z_2(\bk_2-\bp_2, -{\boldsymbol \epsilon}) + P_{\rm L}(-\bk_2-{\boldsymbol \epsilon}+\bp_2) Z_2(-\bk_2-{\boldsymbol \epsilon}+\bp_2, -{\boldsymbol \epsilon}) \right] \right\} \nonumber \\
+  &= \frac{4}{I_{22}^2} \int_{\boldsymbol \epsilon} P(\epsilon) 
+  \left\{ \int_{\hat{\bk}_1,\bp_1} W_{11}(\bp_1) W_{11}({\boldsymbol \epsilon}-\bp_1) \left[ 2 P_{\rm L}(\bk_1-\bp_1) Z_2(\bk_1-\bp_1, {\boldsymbol \epsilon}) \right] \right\} \nonumber \\
+  &\,\, \times \left\{ \int_{\hat{\bk}_2,\bp_2} W_{11}(\bp_2) W_{11}(-{\boldsymbol \epsilon}-\bp_2) \left[ 2 P_{\rm L}(\bk_2-\bp_2) Z_2(\bk_2-\bp_2, -{\boldsymbol \epsilon}) \right] \right\} \nonumber \\
+  &= \frac{16}{I_{22}^2} \int_{\boldsymbol \epsilon} P(\epsilon) 
+  \left\{ \int_{\hat{\bk}_1,\bp_1} W_{11}(\bp_1) W_{11}({\boldsymbol \epsilon}-\bp_1) P_{\rm L}(\bk_1-\bp_1) Z_2(\bk_1-\bp_1, {\boldsymbol \epsilon}) \right\}
+  \left\{ \int_{\hat{\bk}_2,\bp_2} W_{11}(\bp_2) W_{11}(-{\boldsymbol \epsilon}-\bp_2) P_{\rm L}(\bk_2-\bp_2) Z_2(\bk_2-\bp_2, -{\boldsymbol \epsilon}) \right\}.
+\end{align}
+where $Z_2(\bk_1,\bk_2)$ is equal to $F_2(\bk_1,\bk_2)$ in real space, and include an $F_2(\bk_1,\bk_2)$ term even in redshift space.
+We delve into this calculation. Using
+\begin{align}
+  P_{\rm L}(\bk-\bp) \simeq P_{\rm L}(k) - \frac{\partial P_{\rm L}}{\partial \bk} \cdot \bp 
+  = P_{\rm L}(k) - \frac{\partial P_{\rm L}}{\partial \ln k} \frac{\bk}{k^2} \cdot \bp = P_{\rm L}(k) \left( 1- \frac{\partial \ln P_{\rm L}}{\partial \ln k} \frac{\bk \cdot \bp}{k^2} \right),
+\end{align}
+we proceed the object within the curly bracket as
+\begin{align}
+  &\left\{ \int_{\hat{\bk},\bp} W_{11}(\bp) W_{11}({\boldsymbol \epsilon}-\bp) P_{\rm L}(\bk-\bp) F_2(\bk-\bp, {\boldsymbol \epsilon}) \right\} \nonumber \\
+  &\simeq \int_{\hat{\bk},\bp} W_{11}(\bp) W_{11}({\boldsymbol \epsilon}-\bp) P_{\rm L}(k) \left( 1- \frac{\partial \ln P_{\rm L}}{\partial \ln k} \frac{\bk \cdot \bp}{k^2} \right) \left[\frac{5}{7} + \frac{1}{2} (\bk\cdot{\boldsymbol \epsilon} - \bp\cdot{\boldsymbol \epsilon}) \left( \frac{1}{\epsilon^2} + \frac{1}{k^2} \right) + \frac{2}{7} \frac{(\bk\cdot{\boldsymbol \epsilon} - \bp\cdot{\boldsymbol \epsilon})^2}{\epsilon^2 k^2} \right] \nonumber \\
+  &= P_{\rm L}(k) \int_\bp W_{11}(\bp) W_{11}({\boldsymbol \epsilon}-\bp) \int_{\hat{\bk}} \left[ \frac{5}{7} + \frac{1}{2} (\bcancel{\bk\cdot{\boldsymbol \epsilon}} - \bp\cdot{\boldsymbol \epsilon}) \left( \frac{1}{\epsilon^2} + \frac{1}{k^2} \right) + \frac{2}{7} \frac{(\bk\cdot{\boldsymbol \epsilon} - \bp\cdot{\boldsymbol \epsilon})^2}{\epsilon^2 k^2} - \bcancel{\frac{5}{7} \frac{\partial \ln P_{\rm L}}{\partial \ln k} \frac{\bk \cdot \bp}{k^2}} \right. \nonumber \\
+  &~\left. - \frac{1}{2} \frac{\partial \ln P_{\rm L}}{\partial \ln k} \frac{\bk \cdot \bp}{k^2} (\bk\cdot{\boldsymbol \epsilon} - \bcancel{\bp\cdot{\boldsymbol \epsilon}}) \left( \frac{1}{\epsilon^2} + \frac{1}{k^2} \right) - \frac{2}{7} \frac{\partial \ln P_{\rm L}}{\partial \ln k} \frac{\bk \cdot \bp}{k^2} \frac{(\bk\cdot{\boldsymbol \epsilon} - \bp\cdot{\boldsymbol \epsilon})^2}{\epsilon^2 k^2} \right] \nonumber \\
+  &= P_{\rm L}(k) \int_\bp W_{11}(\bp) W_{11}({\boldsymbol \epsilon}-\bp) \int_{\hat{\bk}} \left[ \frac{5}{7} - \frac{1}{2} \left( \frac{\bp\cdot{\boldsymbol \epsilon}}{\epsilon^2} + \frac{\bp\cdot{\boldsymbol \epsilon}}{k^2} \right) + \frac{2}{7} \frac{(\bk\cdot{\boldsymbol \epsilon} - \bp\cdot{\boldsymbol \epsilon})^2}{\epsilon^2 k^2} - \frac{1}{2} \frac{\partial \ln P_{\rm L}}{\partial \ln k} \frac{\bk \cdot \bp}{k^2}  \left( \frac{\bk\cdot{\boldsymbol \epsilon}}{\epsilon^2} + \frac{\bk\cdot{\boldsymbol \epsilon}}{k^2} \right) \right. \nonumber \\
+  &~\left. - \frac{2}{7} \frac{\partial \ln P_{\rm L}}{\partial \ln k} \frac{\bk \cdot \bp}{k^2} \frac{(\bk\cdot{\boldsymbol \epsilon} - \bp\cdot{\boldsymbol \epsilon})^2}{\epsilon^2 k^2} \right] \nonumber \\
+  &\simeq P_{\rm L}(k) \int_\bp W_{11}(\bp) W_{11}({\boldsymbol \epsilon}-\bp) \int_{\hat{\bk}} \left[ \frac{5}{7} - \frac{1}{2} \frac{\bp\cdot{\boldsymbol \epsilon}}{\epsilon^2} + \frac{2}{7} \frac{(\bk\cdot{\boldsymbol \epsilon} - \bp\cdot{\boldsymbol \epsilon})^2}{\epsilon^2 k^2} - \frac{1}{2} \frac{\partial \ln P_{\rm L}}{\partial \ln k} \frac{(\bk \cdot \bp)(\bk\cdot{\boldsymbol \epsilon})}{k^2\epsilon^2} - \frac{2}{7} \frac{\partial \ln P_{\rm L}}{\partial \ln k} \frac{\bk \cdot \bp}{k^2} \frac{(\bk\cdot{\boldsymbol \epsilon} - \bp\cdot{\boldsymbol \epsilon})^2}{\epsilon^2 k^2} \right] \nonumber \\
+  &= P_{\rm L}(k) \int_\bp W_{11}(\bp) W_{11}({\boldsymbol \epsilon}-\bp) \left[ \frac{17}{21} - \frac{1}{2} \frac{\bp\cdot{\boldsymbol \epsilon}}{\epsilon^2} - \int_{\hat{\bk}} \frac{1}{2} \frac{\partial \ln P_{\rm L}}{\partial \ln k} \frac{(\bk \cdot \bp)(\bk\cdot{\boldsymbol \epsilon})}{k^2\epsilon^2} \right]
+\end{align}
+
+\subsection{Local average contribution}
+
+From Eq.~\ref{eq:FKPestimator}, the expectation value of the FKP estimator is
+\begin{align}
+  \avrg{\hat{P}^{\rm FKP}(k)} &= \frac{1}{I_{22}} \int_{\hat{\bk}} \avrg{ \frac{\left| \delta_W(\bk) \right|^2}{1+\delta_{N_{\rm g}}} } \nonumber \\
+  &\simeq P(k) - \frac{1}{I_{22}} \int_{\hat{\bk}} \avrg{ \left| \delta_W(\bk) \right|^2 \delta_{N_{\rm g}} } + \frac{1}{I_{22}} \int_{\hat{\bk}} \avrg{ \left| \delta_W(\bk) \right|^2 \delta^2_{N_{\rm g}} } \nonumber \\
+  &\simeq P(k) - \frac{1}{I_{22}} \int_{\hat{\bk}} \avrg{ \left| \delta_W(\bk) \right|^2 \delta_{N_{\rm g}} } + P(k) \avrg{ \delta^2_{N_{\rm g}} }.
+\end{align}
+The second term is proceeded as
+\begin{align}
+  \int_{\hat{\bk}} \avrg{ \left| \delta_W(\bk) \right|^2 \delta_{N_{\rm g}}  }
+  &= \frac{1}{I_{10}} \int_{\hat{\bk}} \avrg{ \left| \delta_W(\bk) \right|^2 \int_{\bx} W_{10}(\bx) \delta(\bx) } \nonumber \\
+  &= \int_{\hat{\bk}, {\boldsymbol \epsilon}} \avrg{ \left| \int_{\bx} e^{i\bk \cdot \bx} W_{11}(\bx) \delta(\bx) \right|^2 W_{10}(-{\boldsymbol \epsilon}) \delta(-{\boldsymbol \epsilon}) }  \nonumber \\
+  &= \int_{\hat{\bk}, {\boldsymbol \epsilon}} \avrg{ \int_{\bx} e^{i\bk \cdot \bx} W_{11}(\bx) \delta(\bx) \int_{\bx'} e^{-i\bk \cdot \bx'} W_{11}(\bx') \delta(\bx') W_{10}(-{\boldsymbol \epsilon}) \delta(-{\boldsymbol \epsilon}) } 
+\end{align}
+
+This is the test sentence.
+
+\vspace{\baselineskip}
+
+\bibliography{lssref}
+\bibliographystyle{junsrt}
+
+\end{document}
